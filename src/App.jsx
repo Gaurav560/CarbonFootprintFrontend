@@ -31,7 +31,7 @@ export default function App() {
     const confirmDelete = window.confirm('Delete this entry?')
     if (!confirmDelete) return
     try {
-      const res = await fetch(`/api/footprint/${id}`, { method: 'DELETE' })
+  const res = await fetch(`https://q2wgrjtaef.ap-south-1.awsapprunner.com/api/footprint/${id}`, { method: 'DELETE' })
       if (!res.ok && res.status !== 204) throw new Error('Delete failed')
       fetchHistory()
     } catch (err) {
@@ -50,7 +50,7 @@ export default function App() {
 
   async function fetchHistory() {
     try {
-      const res = await fetch(`/api/footprint/history/${encodeURIComponent(userId)}`)
+  const res = await fetch(`https://q2wgrjtaef.ap-south-1.awsapprunner.com/api/footprint/history/${encodeURIComponent(userId)}`)
       if (!res.ok) throw new Error('Failed to load history')
       const data = await res.json()
       setHistory(Array.isArray(data) ? data : [])
@@ -85,7 +85,7 @@ export default function App() {
         otherActivities: otherActivities || null,
       }
 
-      const res = await fetch('/api/footprint/calculate', {
+  const res = await fetch('https://q2wgrjtaef.ap-south-1.awsapprunner.com/api/footprint/calculate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
